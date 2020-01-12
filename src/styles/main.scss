@@ -139,6 +139,10 @@ body {
 
     }
 
+    .sidebar-dropdown.active .sidebar-submenu {
+        display: block;
+    }
+
     .mCSB_scrollTools {
         width: 6px;
     }

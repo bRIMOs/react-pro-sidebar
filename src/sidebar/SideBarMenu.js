@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import userImage from '../images/user.jpg'
 import { Scrollbars } from 'react-custom-scrollbars';
+import SideBarConfig from './MenuConfig';
 
-let renderCustomHorizontalThum = ({ style, ...props }) => {
+
+
+
+let renderCustomHorizontalThumb = ({ style, ...props }) => {
                         
     const thumbStyle = {
         backgroundColor: `rgba(255,255,255,0.3)`,
@@ -16,13 +20,80 @@ let renderCustomHorizontalThum = ({ style, ...props }) => {
     );
 }
 
+
+
+
 function SideBarMenu() {
+    let initialMenuItems = [];
+    SideBarConfig.menus.forEach( (menu, index) => {
+        let active = menu.active ? menu.active : false;
+        initialMenuItems.push({
+            active:active
+        });
+    });
+    
+    const [menuItems , setMenuItems] = useState(initialMenuItems);
+    
+    const handleMenuDropDownClick = (index) => {
+        let newArray = menuItems.map( ( item, idx ) => {
+            // check if index equal to current clicked so put inverse value otherwise set to false (collapse other menu)
+            (index === idx) ? item.active = !item.active : item.active = false;
+            return item;
+        });
+        setMenuItems([
+            ...newArray
+        ]);
+    }
+    
+    const renderSideBarMenuItem = () => {
+        return !SideBarConfig["menus"].length ? "" : (
+            
+            SideBarConfig.menus.map( (menu , index ) => {
+                let menuContent = ""; let klass = ""; let subMenuContent ; let subMenus = [];
+                menu.type === 'dropdown' ? klass = "sidebar-dropdown" : ( menu.type === 'header' ? klass = "header-menu" : klass = "" );
+                
+    
+                if (menu.type === 'header') {
+                    menuContent = <span>{menu.title}</span>;
+                } else {
+                    if( menu.type === 'dropdown' ) {
+                        if(menu.submenus.length) {
+                            subMenus = menu.submenus.forEach( (submenu,index) => {
+                                return (
+                                    <li key={index}>
+                                        <a href="#e"> {submenu.title}
+                                            { submenu.badge ? <span className={"badge badge-pill "+submenu.badge.class}> {submenu.badge.text} </span> : "" } 
+                                        </a>
+                                    </li>
+                                );
+                            });
+                            subMenuContent = <div className="sidebar-submenu" ><ul> {subMenus} </ul></div>;
+                        }
+                        
+                    }
+                    menuContent = <a href="#s">
+                                    <i className={menu.icon}></i>
+                                    <span className="menu-text">{menu.title}</span>
+                                    { menu.badge ? <span className={"badge badge-pill "+menu.badge.class}> {menu.badge.text} </span> : "" }
+                                  </a> 
+                }
+                let liElementList = "";
+                if(menu.type === 'dropdown' ) {
+                    liElementList = <li key={index} onClick={ (e) =>{ handleMenuDropDownClick(index)} } className={menuItems[index] ? ( menuItems[index].active ? klass +" active" : klass) : klass } >{menuContent}{subMenuContent}</li>;
+                } else {
+                    liElementList =  <li key={index} className={klass} >{menuContent}{subMenuContent}</li>
+                }
+                return liElementList;
+            })
+        )
+    }
+    //console.log(SideBarConfig);
+
     return (
         <nav id="sidebar" className="sidebar-wrapper">
-            
             <div className="sidebar-content">
                 <Scrollbars
-                    renderThumbVertical={ renderCustomHorizontalThum }>
+                    renderThumbVertical={ renderCustomHorizontalThumb }>
                     <div className="sidebar-item sidebar-brand">
                         <a href="#s">pro sidebar</a>
                     </div>
@@ -54,8 +125,10 @@ function SideBarMenu() {
                         </div>
                     </div>
                     <div className=" sidebar-item sidebar-menu">
-                        <ul>
-                            <li className="header-menu">
+                         <ul>
+                           {renderSideBarMenuItem()}
+
+                           {/* <li className="header-menu">
                                 <span>General</span>
                             </li>
                             <li onClick={(e)=> {
@@ -193,7 +266,7 @@ function SideBarMenu() {
                                     <i className="fa fa-folder"></i>
                                     <span className="menu-text">Examples</span>
                                 </a>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                 </Scrollbars>

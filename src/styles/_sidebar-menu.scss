@@ -58,13 +58,14 @@
                 position: absolute;
                 right: 15px;
                 top: 14px;
-                transition: transform .3s ease;
+                transition: transform 0.3s ease;
 
             }
 
             .sidebar-submenu {
                 display: none;
-
+                overflow: hidden;
+                transition: height 0.3s ease;
                 ul {
                     padding: 5px 0;
                 }
