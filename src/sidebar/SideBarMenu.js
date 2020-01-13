@@ -34,7 +34,10 @@ function SideBarMenu() {
     
     const [menuItems , setMenuItems] = useState(initialMenuItems);
     
-    const handleMenuDropDownClick = (index) => {
+    const handleMenuDropDownClick = (e,index) => {
+        //var height = e.currentTarget.nextElementSibling.scrollHeight;
+        //e.currentTarget.nextElementSibling.style.height = "20px !imprtant";
+        //console.log(e.currentTarget.nextElementSibling.style,height);
         let newArray = menuItems.map( ( item, idx ) => {
             // check if index equal to current clicked so put inverse value otherwise set to false (collapse other menu)
             (index === idx) ? item.active = !item.active : item.active = false;
@@ -55,22 +58,27 @@ function SideBarMenu() {
     
                 if (menu.type === 'header') {
                     menuContent = <span>{menu.title}</span>;
-                } else {
-                    if( menu.type === 'dropdown' ) {
-                        if(menu.submenus.length) {
-                            subMenus = menu.submenus.forEach( (submenu,index) => {
-                                return (
-                                    <li key={index}>
-                                        <a href="#e"> {submenu.title}
-                                            { submenu.badge ? <span className={"badge badge-pill "+submenu.badge.class}> {submenu.badge.text} </span> : "" } 
-                                        </a>
-                                    </li>
-                                );
-                            });
-                            subMenuContent = <div className="sidebar-submenu" ><ul> {subMenus} </ul></div>;
-                        }
-                        
+                } else  if( menu.type === 'dropdown' ){
+                    
+                    if(menu.submenus.length) {
+                        subMenus = menu.submenus.map( (submenu,index) => {
+                            return (
+                                <li key={index}>
+                                    <a href="#e"> {submenu.title}
+                                        { submenu.badge ? <span className={"badge badge-pill "+submenu.badge.class}> {submenu.badge.text} </span> : "" } 
+                                    </a>
+                                </li>
+                            );
+                        });
+                        subMenuContent = <div className="sidebar-submenu" /*style={ !menuItems[index].active ? {height:0} : {}}*/ ><ul> {subMenus} </ul></div>;
                     }
+                    const linkMenu =<a href="#s" onClick={(e) => { handleMenuDropDownClick(e,index)}}>
+                                        <i className={menu.icon}></i>
+                                        <span className="menu-text">{menu.title}</span>
+                                        { menu.badge ? <span className={"badge badge-pill "+menu.badge.class}> {menu.badge.text} </span> : "" }
+                                    </a> 
+                    menuContent = <> {linkMenu} {subMenuContent} </>
+                } else {
                     menuContent = <a href="#s">
                                     <i className={menu.icon}></i>
                                     <span className="menu-text">{menu.title}</span>
@@ -79,9 +87,9 @@ function SideBarMenu() {
                 }
                 let liElementList = "";
                 if(menu.type === 'dropdown' ) {
-                    liElementList = <li key={index} onClick={ (e) =>{ handleMenuDropDownClick(index)} } className={menuItems[index] ? ( menuItems[index].active ? klass +" active" : klass) : klass } >{menuContent}{subMenuContent}</li>;
+                    liElementList = <li key={index} className={menuItems[index] ? ( menuItems[index].active ? klass +" active" : klass) : klass } >{menuContent}</li>;
                 } else {
-                    liElementList =  <li key={index} className={klass} >{menuContent}{subMenuContent}</li>
+                    liElementList =  <li key={index} className={klass} >{menuContent}</li>
                 }
                 return liElementList;
             })

@@ -140,7 +140,8 @@ body {
     }
 
     .sidebar-dropdown.active .sidebar-submenu {
-        display: block;
+        max-height: 200px;
+        transition: all 0.4s ease;
     }
 
     .mCSB_scrollTools {

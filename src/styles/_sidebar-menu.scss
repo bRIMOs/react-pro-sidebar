@@ -63,9 +63,9 @@
             }
 
             .sidebar-submenu {
-                display: none;
+                transition: all 0.4s ease;
+                max-height: 0px;
                 overflow: hidden;
-                transition: height 0.3s ease;
                 ul {
                     padding: 5px 0;
                 }
