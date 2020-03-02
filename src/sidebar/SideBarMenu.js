@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import userImage from '../images/user.jpg'
 import { Scrollbars } from 'react-custom-scrollbars';
 import SideBarConfig from './MenuConfig';
-
-
-
-
+import DropdownMenu from './DropdownMenu';
+import SimpleMenu from './SimpleMenu';
+ 
 let renderCustomHorizontalThumb = ({ style, ...props }) => {
                         
     const thumbStyle = {
@@ -31,6 +30,7 @@ function SideBarMenu() {
             active:active
         });
     });
+
     
     const [menuItems , setMenuItems] = useState(initialMenuItems);
     
@@ -52,44 +52,14 @@ function SideBarMenu() {
         return !SideBarConfig["menus"].length ? "" : (
             
             SideBarConfig.menus.map( (menu , index ) => {
-                let menuContent = ""; let klass = ""; let subMenuContent ; let subMenus = [];
-                menu.type === 'dropdown' ? klass = "sidebar-dropdown" : ( menu.type === 'header' ? klass = "header-menu" : klass = "" );
                 
-    
-                if (menu.type === 'header') {
-                    menuContent = <span>{menu.title}</span>;
-                } else  if( menu.type === 'dropdown' ){
-                    
-                    if(menu.submenus.length) {
-                        subMenus = menu.submenus.map( (submenu,index) => {
-                            return (
-                                <li key={index}>
-                                    <a href="#e"> {submenu.title}
-                                        { submenu.badge ? <span className={"badge badge-pill "+submenu.badge.class}> {submenu.badge.text} </span> : "" } 
-                                    </a>
-                                </li>
-                            );
-                        });
-                        subMenuContent = <div className="sidebar-submenu" /*style={ !menuItems[index].active ? {height:0} : {}}*/ ><ul> {subMenus} </ul></div>;
-                    }
-                    const linkMenu =<a href="#s" onClick={(e) => { handleMenuDropDownClick(e,index)}}>
-                                        <i className={menu.icon}></i>
-                                        <span className="menu-text">{menu.title}</span>
-                                        { menu.badge ? <span className={"badge badge-pill "+menu.badge.class}> {menu.badge.text} </span> : "" }
-                                    </a> 
-                    menuContent = <> {linkMenu} {subMenuContent} </>
-                } else {
-                    menuContent = <a href="#s">
-                                    <i className={menu.icon}></i>
-                                    <span className="menu-text">{menu.title}</span>
-                                    { menu.badge ? <span className={"badge badge-pill "+menu.badge.class}> {menu.badge.text} </span> : "" }
-                                  </a> 
-                }
                 let liElementList = "";
-                if(menu.type === 'dropdown' ) {
-                    liElementList = <li key={index} className={menuItems[index] ? ( menuItems[index].active ? klass +" active" : klass) : klass } >{menuContent}</li>;
-                } else {
-                    liElementList =  <li key={index} className={klass} >{menuContent}</li>
+                if (menu.type === 'header') {
+                    liElementList = <li className="header-menu"><span>{menu.title}</span></li>;
+                }else if(menu.type === 'dropdown' ) {
+                    liElementList = <DropdownMenu menu={menu}  active={menuItems[index].active} key={"sidebar"+index} handleClick={(e) => handleMenuDropDownClick(e,index) } />;
+                } else if(menu.type === 'simple' ) {
+                    liElementList =  <SimpleMenu menu={menu} />;
                 }
                 return liElementList;
             })
@@ -135,146 +105,7 @@ function SideBarMenu() {
                     <div className=" sidebar-item sidebar-menu">
                          <ul>
                            {renderSideBarMenuItem()}
-
-                           {/* <li className="header-menu">
-                                <span>General</span>
-                            </li>
-                            <li onClick={(e)=> {
-                                e.stopPropagation()
-                                let classList = e.currentTarget.classList;
-                                console.log(classList.contains("active") ? classList.remove("active") : classList.add("active") );
-                                console.log(this);
-                                console.log(this);
-                            }}
-                            className="sidebar-dropdown">
-                                <a href="#toremove">
-                                    <i className="fa fa-tachometer-alt"></i>
-                                    <span className="menu-text">Dashboard</span>
-                                    <span className="badge badge-pill badge-warning">New</span>
-                                </a>
-                                <div className="sidebar-submenu">
-                                    <ul>
-                                        <li>
-                                            <a href="#toremove">Dashboard 1
-                                                <span className="badge badge-pill badge-success">Pro</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#toremove">Dashboard 2</a>
-                                        </li>
-                                        <li>
-                                            <a href="#toremove">Dashboard 3</a>
-                                        </li>
-                                    </ul>
-                                </div>                    
-                            </li>
-                            <li className="sidebar-dropdown">
-                                <a href="#toremove">
-                                    <i className="fa fa-shopping-cart"></i>
-                                    <span className="menu-text">E-commerce</span>
-                                    <span className="badge badge-pill badge-danger">3</span>
-                                </a>
-                                <div className="sidebar-submenu">
-                                    <ul>
-                                        <li>
-                                            <a href="#toremove">Products
-
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#toremove">Orders</a>
-                                        </li>
-                                        <li>
-                                            <a href="#toremove">Credit cart</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li className="sidebar-dropdown">
-                                <a href="#toremove">
-                                    <i className="far fa-gem"></i>
-                                    <span className="menu-text">Components</span>
-                                </a>
-                                <div className="sidebar-submenu">
-                                    <ul>
-                                        <li>
-                                            <a href="#toremove">General</a>
-                                        </li>
-                                        <li>
-                                            <a href="#toremove">Panels</a>
-                                        </li>
-                                        <li>
-                                            <a href="#toremove">Tables</a>
-                                        </li>
-                                        <li>
-                                            <a href="#toremove">Icons</a>
-                                        </li>
-                                        <li>
-                                            <a href="#toremove">Forms</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li className="sidebar-dropdown">
-                                <a href="#toremove">
-                                    <i className="fa fa-chart-line"></i>
-                                    <span className="menu-text">Charts</span>
-                                </a>
-                                <div className="sidebar-submenu">
-                                    <ul>
-                                        <li>
-                                            <a href="#toremove">Pie chart</a>
-                                        </li>
-                                        <li>
-                                            <a href="#toremove">Line chart</a>
-                                        </li>
-                                        <li>
-                                            <a href="#toremove">Bar chart</a>
-                                        </li>
-                                        <li>
-                                            <a href="#toremove">Histogram</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li className="sidebar-dropdown">
-                                <a href="#toremove">
-                                    <i className="fa fa-globe"></i>
-                                    <span className="menu-text">Maps</span>
-                                </a>
-                                <div className="sidebar-submenu">
-                                    <ul>
-                                        <li>
-                                            <a href="#toremove">Google maps</a>
-                                        </li>
-                                        <li>
-                                            <a href="#toremove">Open street map</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li className="header-menu">
-                                <span>Extra</span>
-                            </li>
-                            <li>
-                                <a href="#toremove">
-                                    <i className="fa fa-book"></i>
-                                    <span className="menu-text">Documentation</span>
-                                    <span className="badge badge-pill badge-primary">Beta</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#toremove">
-                                    <i className="fa fa-calendar"></i>
-                                    <span className="menu-text">Calendar</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#toremove">
-                                    <i className="fa fa-folder"></i>
-                                    <span className="menu-text">Examples</span>
-                                </a>
-                            </li> */}
+                        
                         </ul>
                     </div>
                 </Scrollbars>
