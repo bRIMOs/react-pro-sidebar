@@ -4,7 +4,10 @@ import { Scrollbars } from 'react-custom-scrollbars';
 import SideBarConfig from './MenuConfig';
 import DropdownMenu from './DropdownMenu';
 import SimpleMenu from './SimpleMenu';
- 
+import Dropdown from 'react-bootstrap/Dropdown';
+
+import user1 from '../images/user.jpg';
+
 let renderCustomHorizontalThumb = ({ style, ...props }) => {
                         
     const thumbStyle = {
@@ -35,9 +38,6 @@ function SideBarMenu() {
     const [menuItems , setMenuItems] = useState(initialMenuItems);
     
     const handleMenuDropDownClick = (e,index) => {
-        //var height = e.currentTarget.nextElementSibling.scrollHeight;
-        //e.currentTarget.nextElementSibling.style.height = "20px !imprtant";
-        //console.log(e.currentTarget.nextElementSibling.style,height);
         let newArray = menuItems.map( ( item, idx ) => {
             // check if index equal to current clicked so put inverse value otherwise set to false (collapse other menu)
             (index === idx) ? item.active = !item.active : item.active = false;
@@ -65,7 +65,19 @@ function SideBarMenu() {
             })
         )
     }
-    //console.log(SideBarConfig);
+
+    const CustomDropDownToggle = React.forwardRef(({ children, onClick }, ref) => (
+        <a
+          href="#/nothing"
+          ref={ref}
+          onClick={e => {
+            e.preventDefault();
+            onClick(e);
+          }}
+        >
+          {children}
+        </a>
+    ));
 
     return (
         <nav id="sidebar" className="sidebar-wrapper">
@@ -73,7 +85,7 @@ function SideBarMenu() {
                 <Scrollbars
                     renderThumbVertical={ renderCustomHorizontalThumb }>
                     <div className="sidebar-item sidebar-brand">
-                        <a href="#s">pro sidebar</a>
+                        <a href="#/header">pro sidebar</a>
                     </div>
                     <div className="sidebar-item sidebar-header d-flex flex-nowrap">
                         <div className="user-pic">
@@ -111,20 +123,20 @@ function SideBarMenu() {
                 </Scrollbars>
             </div>
             <div className="sidebar-footer">
-                <div className="dropdown">
-
-                    <a href="#toremove" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <Dropdown>
+                    <Dropdown.Toggle as={CustomDropDownToggle} id="dropdown-basic">
                         <i className="fa fa-bell"></i>
                         <span className="badge badge-pill badge-warning notification">3</span>
-                    </a>
-                    <div className="dropdown-menu notifications" aria-labelledby="dropdownMenuMessage">
-                        <div className="notifications-header">
+                    </Dropdown.Toggle>
+                    
+                    <Dropdown.Menu className="notifications" >
+                        <Dropdown.Header className="notifications-header" >
                             <i className="fa fa-bell"></i>
-                            Notifications
-                        </div>
-                        <div className="dropdown-divider"></div>
-                        <a className="dropdown-item" href="#toremove">
-                            <div className="notification-content">
+                            &nbsp;Notifications
+                        </Dropdown.Header>
+                        <Dropdown.Divider />
+                        <Dropdown.Item href="#/toremove">
+                        <div className="notification-content">
                                 <div className="icon">
                                     <i className="fas fa-check text-success border border-success"></i>
                                 </div>
@@ -136,9 +148,9 @@ function SideBarMenu() {
                                     </div>
                                 </div>
                             </div>
-                        </a>
-                        <a className="dropdown-item" href="#toremove">
-                            <div className="notification-content">
+                        </Dropdown.Item>
+                        <Dropdown.Item href="#/toremove">
+                        <div className="notification-content">
                                 <div className="icon">
                                     <i className="fas fa-exclamation text-info border border-info"></i>
                                 </div>
@@ -150,8 +162,8 @@ function SideBarMenu() {
                                     </div>
                                 </div>
                             </div>
-                        </a>
-                        <a className="dropdown-item" href="#toremove">
+                        </Dropdown.Item>
+                        <Dropdown.Item href="#/toremove">
                             <div className="notification-content">
                                 <div className="icon">
                                     <i className="fas fa-exclamation-triangle text-warning border border-warning"></i>
@@ -164,26 +176,29 @@ function SideBarMenu() {
                                     </div>
                                 </div>
                             </div>
-                        </a>
-                        <div className="dropdown-divider"></div>
-                        <a className="dropdown-item text-center" href="#toremove">View all notifications</a>
-                    </div>
-                </div>
-                <div className="dropdown">
-                    <a href="#toremove" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </Dropdown.Item>
+                        <Dropdown.Divider />
+                        <Dropdown.Item className="text-center" href="#/toremove">
+                            View all notifications
+                        </Dropdown.Item>
+                    </Dropdown.Menu>    
+                </Dropdown>
+                <Dropdown>
+                    <Dropdown.Toggle as={CustomDropDownToggle} id="dropdown-basic">
                         <i className="fa fa-envelope"></i>
                         <span className="badge badge-pill badge-success notification">7</span>
-                    </a>
-                    <div className="dropdown-menu messages" aria-labelledby="dropdownMenuMessage">
-                        <div className="messages-header">
-                            <i className="fa fa-envelope"></i>
-                            Messages
-                        </div>
-                        <div className="dropdown-divider"></div>
-                        <a className="dropdown-item" href="#toremove">
+                    </Dropdown.Toggle>
+                    
+                    <Dropdown.Menu className="messages" >
+                        <Dropdown.Header>
+                            <i className="fa fa-envelope"> </i> 
+                            &nbsp;Messages
+                        </Dropdown.Header>
+                        <Dropdown.Divider />
+                        <Dropdown.Item href="#/toremove">
                             <div className="message-content">
                                 <div className="pic">
-                                    <img src="img/user.jpg" alt="" />
+                                    <img src={user1} alt="" />
                                 </div>
                                 <div className="content">
                                     <div className="message-title">
@@ -193,12 +208,11 @@ function SideBarMenu() {
                                         elit. In totam explicabo</div>
                                 </div>
                             </div>
-
-                        </a>
-                        <a className="dropdown-item" href="#toremove">
+                        </Dropdown.Item>
+                        <Dropdown.Item href="#/toremove">
                             <div className="message-content">
                                 <div className="pic">
-                                    <img src="img/user.jpg" alt="" />
+                                    <img src={user1} alt="" />
                                 </div>
                                 <div className="content">
                                     <div className="message-title">
@@ -208,12 +222,11 @@ function SideBarMenu() {
                                         elit. In totam explicabo</div>
                                 </div>
                             </div>
-
-                        </a>
-                        <a className="dropdown-item" href="#toremove">
+                        </Dropdown.Item>
+                        <Dropdown.Item href="#/toremove">
                             <div className="message-content">
                                 <div className="pic">
-                                    <img src="img/user.jpg" alt="" />
+                                    <img src={user1} alt="" />
                                 </div>
                                 <div className="content">
                                     <div className="message-title">
@@ -223,13 +236,26 @@ function SideBarMenu() {
                                         elit. In totam explicabo</div>
                                 </div>
                             </div>
-                        </a>
-                        <div className="dropdown-divider"></div>
-                        <a className="dropdown-item text-center" href="#toremove">View all messages</a>
+                        </Dropdown.Item>
+                        <Dropdown.Divider />
+                        <Dropdown.Item className="text-center" href="#/toremove">
+                            View all messages
+                        </Dropdown.Item>
+                    </Dropdown.Menu>    
+                </Dropdown>
+                <Dropdown>
+                    <Dropdown.Toggle as={CustomDropDownToggle} id="dropdown-basic">
+                        <i className="fa fa-cog"></i>
+                        <span className="badge-sonar"></span>
+                    </Dropdown.Toggle>
 
-                    </div>
-                </div>
-                <div className="dropdown">
+                    <Dropdown.Menu  >
+                        <Dropdown.Item href="#/toremove">My profile</Dropdown.Item>
+                        <Dropdown.Item href="#/toremove">Help</Dropdown.Item>
+                        <Dropdown.Item href="#/toremove">Setting</Dropdown.Item>
+                    </Dropdown.Menu>    
+                </Dropdown>
+                {/* <div className="dropdown">
                     <a href="#toremove" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i className="fa fa-cog"></i>
                         <span className="badge-sonar"></span>
@@ -239,7 +265,7 @@ function SideBarMenu() {
                         <a className="dropdown-item" href="#toremove">Help</a>
                         <a className="dropdown-item" href="#toremove">Setting</a>
                     </div>
-                </div>
+                </div> */}
                 <div>
                     <a href="#toremove">
                         <i className="fa fa-power-off"></i>

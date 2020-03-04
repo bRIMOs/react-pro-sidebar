@@ -1,4 +1,4 @@
-import React,  { useState } from 'react';
+import React/*, { useState } */from 'react';
 import { animated } from 'react-spring'
 import {Spring} from 'react-spring/renderprops';
 
@@ -34,13 +34,11 @@ function DropdownMenu(props) {
             );
         });
         subMenuContent= <Spring  from={openStyle} to={ props.active ? openStyle : closedStyle }>
-                            {props => {
-                                console.log(props);
-                                return (
+                            { props => 
                                 <animated.div className="sidebar-submenu" style={props} >
                                     <ul> {subMenus} </ul>
                                 </animated.div>
-                            )}}
+                            }
                         </Spring>
     }
     const linkMenu =<a href="#s" onClick={(e) => { handleMenuDropDownClick(e)}}>
