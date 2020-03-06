@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import userImage from '../images/user.jpg'
 import { Scrollbars } from 'react-custom-scrollbars';
 import SideBarConfig from './MenuConfig';
 import DropdownMenu from './DropdownMenu';
 import SimpleMenu from './SimpleMenu';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-import user1 from '../images/user.jpg';
+import userImage from '../../images/user.jpg';
 
 let renderCustomHorizontalThumb = ({ style, ...props }) => {
                         
@@ -198,7 +197,7 @@ function SideBarMenu() {
                         <Dropdown.Item href="#/toremove">
                             <div className="message-content">
                                 <div className="pic">
-                                    <img src={user1} alt="" />
+                                    <img src={userImage} alt="" />
                                 </div>
                                 <div className="content">
                                     <div className="message-title">
@@ -212,7 +211,7 @@ function SideBarMenu() {
                         <Dropdown.Item href="#/toremove">
                             <div className="message-content">
                                 <div className="pic">
-                                    <img src={user1} alt="" />
+                                    <img src={userImage} alt="" />
                                 </div>
                                 <div className="content">
                                     <div className="message-title">
@@ -226,7 +225,7 @@ function SideBarMenu() {
                         <Dropdown.Item href="#/toremove">
                             <div className="message-content">
                                 <div className="pic">
-                                    <img src={user1} alt="" />
+                                    <img src={userImage} alt="" />
                                 </div>
                                 <div className="content">
                                     <div className="message-title">
