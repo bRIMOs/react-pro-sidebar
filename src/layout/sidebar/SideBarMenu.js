@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Scrollbars } from 'react-custom-scrollbars';
 import SideBarConfig from './MenuConfig';
+
 import DropdownMenu from './DropdownMenu';
 import SimpleMenu from './SimpleMenu';
 import Dropdown from 'react-bootstrap/Dropdown';
@@ -25,6 +26,7 @@ let renderCustomHorizontalThumb = ({ style, ...props }) => {
 
 
 function SideBarMenu() {
+
     let initialMenuItems = [];
     SideBarConfig.menus.forEach( (menu, index) => {
         let active = menu.active ? menu.active : false;
