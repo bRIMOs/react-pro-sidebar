@@ -139,6 +139,11 @@ body {
 
     }
 
+    .sidebar-dropdown.active .sidebar-submenu {
+        max-height: 300px;
+        /*transition: all 0.4s ease;*/
+    }
+
     .mCSB_scrollTools {
         width: 6px;
     }
