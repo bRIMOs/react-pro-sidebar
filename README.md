@@ -7,6 +7,12 @@ this project uses react-create-app from React
 Check [HTML version](https://github.com/azouaoui-med/pro-sidebar-template)
 And [Angular version](https://github.com/azouaoui-med/angular-pro-sidebar)
 
+## Capture 
+
+![Pro Sidebar](https://repository-images.githubusercontent.com/233310014/94f0bc00-63fa-11ea-8a69-b9d5ecee1d01)
+
+
+
 ## Demo
 
 [not yet]()
