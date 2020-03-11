@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {  BrowserRouter as Router } from 'react-router-dom';
 //import logo from './logo.svg';
 import './App.scss';
 import SideBar from './layout/sidebar/SideBarMenu'
@@ -13,15 +14,16 @@ function App() {
   style += hasBackground ? " sidebar-bg" : "";
 
   return (
-    <GlobalAppContext.Provider
-      value={{toggled, setToggled, hasBackground, setHasBackground}}  
-    >
-      <div className={"page-wrapper default-theme bg1 "+ style  }>
-        <SideBar />
-        <MainContent />
-      </div>
-    </GlobalAppContext.Provider>
-    
+    <Router>
+      <GlobalAppContext.Provider
+        value={{toggled, setToggled, hasBackground, setHasBackground}}  
+      >
+        <div className={"page-wrapper default-theme bg1 "+ style  }>
+          <SideBar />
+          <MainContent />
+        </div>
+      </GlobalAppContext.Provider>
+    </Router>
   );
 }
 
