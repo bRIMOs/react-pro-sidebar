@@ -15,7 +15,7 @@ And [Angular version](https://github.com/azouaoui-med/angular-pro-sidebar)
 
 ## Demo
 
-[Demo](https://brimos.github.io/react-pro-sidebar/build/)
+[Live Demo](https://brimos.github.io/react-pro-sidebar/build/)
 
 ## Quick start
 
