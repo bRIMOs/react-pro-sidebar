@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.ec15d049.chunk.css",
-    "main.js": "/static/js/main.0214f8fc.chunk.js",
-    "main.js.map": "/static/js/main.0214f8fc.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.bf68688f.js",
-    "runtime-main.js.map": "/static/js/runtime-main.bf68688f.js.map",
-    "static/js/2.68c64a36.chunk.js": "/static/js/2.68c64a36.chunk.js",
-    "static/js/2.68c64a36.chunk.js.map": "/static/js/2.68c64a36.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.471aeda6cea7fc831eb67789e8ff2630.js": "/precache-manifest.471aeda6cea7fc831eb67789e8ff2630.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.ec15d049.chunk.css.map": "/static/css/main.ec15d049.chunk.css.map",
-    "static/js/2.68c64a36.chunk.js.LICENSE": "/static/js/2.68c64a36.chunk.js.LICENSE",
-    "static/media/App.scss": "/static/media/bg4.23d3b8d4.jpg",
-    "static/media/logo.svg": "/static/media/logo.5d5d9eef.svg"
+    "main.css": "/react-pro-sidebar/build/static/css/main.9477584f.chunk.css",
+    "main.js": "/react-pro-sidebar/build/static/js/main.f4a58b2b.chunk.js",
+    "main.js.map": "/react-pro-sidebar/build/static/js/main.f4a58b2b.chunk.js.map",
+    "runtime-main.js": "/react-pro-sidebar/build/static/js/runtime-main.58fe3184.js",
+    "runtime-main.js.map": "/react-pro-sidebar/build/static/js/runtime-main.58fe3184.js.map",
+    "static/js/2.68c64a36.chunk.js": "/react-pro-sidebar/build/static/js/2.68c64a36.chunk.js",
+    "static/js/2.68c64a36.chunk.js.map": "/react-pro-sidebar/build/static/js/2.68c64a36.chunk.js.map",
+    "index.html": "/react-pro-sidebar/build/index.html",
+    "precache-manifest.83f5c654652b4b55cb2035e6abe68fde.js": "/react-pro-sidebar/build/precache-manifest.83f5c654652b4b55cb2035e6abe68fde.js",
+    "service-worker.js": "/react-pro-sidebar/build/service-worker.js",
+    "static/css/main.9477584f.chunk.css.map": "/react-pro-sidebar/build/static/css/main.9477584f.chunk.css.map",
+    "static/js/2.68c64a36.chunk.js.LICENSE": "/react-pro-sidebar/build/static/js/2.68c64a36.chunk.js.LICENSE",
+    "static/media/App.scss": "/react-pro-sidebar/build/static/media/bg4.23d3b8d4.jpg",
+    "static/media/logo.svg": "/react-pro-sidebar/build/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.bf68688f.js",
+    "static/js/runtime-main.58fe3184.js",
     "static/js/2.68c64a36.chunk.js",
-    "static/css/main.ec15d049.chunk.css",
-    "static/js/main.0214f8fc.chunk.js"
+    "static/css/main.9477584f.chunk.css",
+    "static/js/main.f4a58b2b.chunk.js"
   ]
 }
