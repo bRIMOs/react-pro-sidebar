@@ -1,9 +1,10 @@
 # React Pro Sidebar
 
-A responsive sidebar template  version of the [HTML React pro side bar](https://github.com/azouaoui-med/pro-sidebar-template) with dropdown menu built with react 16.8 and bootstrap 4
+A responsive sidebar template  version of the [HTML pro side bar](https://github.com/azouaoui-med/pro-sidebar-template) with dropdown menu built with react 16.8 and bootstrap 4
 
 this project uses react-create-app from React
 
+Original versions made by [Azouaoui Mohamed](https://github.com/azouaoui-med/)
 Check [HTML version](https://github.com/azouaoui-med/pro-sidebar-template)
 And [Angular version](https://github.com/azouaoui-med/angular-pro-sidebar)
 
